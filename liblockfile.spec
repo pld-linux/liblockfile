@@ -3,7 +3,7 @@ Name:		liblockfile
 Version:	1.06.1
 Release:	1
 License:	LGPL
-Group:		Applications/System
+Group:		Libraries
 Source0:	http://ftp.debian.org/debian/pool/main/libl/liblockfile/%{name}_%{version}.tar.gz
 # Source0-md5:	a6ab675558e50ea8d99648f707a121a0
 BuildRequires:	autoconf
