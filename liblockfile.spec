@@ -1,4 +1,5 @@
 Summary:	NFS-safe locking library, includes dotlockfile program
+Summary(pl):	Biblioteka blokowania plików uwzglêdniaj±ca NFS wraz z programem dotlockfile
 Name:		liblockfile
 Version:	1.06.1
 Release:	1
@@ -13,14 +14,24 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Liblockfile is a shared library with NFS-safe locking functions. It
 includes the command-line utility ``dotlockfile''.
 
+%description -l pl
+liblockfile to biblioteka wspó³dzielona z funkcjami blokowania plików
+bezpiecznymi tak¿e w przypadku u¿ywania NFS-a. Zawiera dzia³aj±cy z
+linii poleceñ program dotlockfile.
+
 %package devel
-Summary:	Development library for liblockfile
+Summary:	Header files for liblockfile library
+Summary(pl):	Pliki nag³ówkowe biblioteki liblockfle
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description devel
-This is a development library for liblockfile. It includes headers and
+This is a development package for liblockfile. It includes headers and
 documentation.
+
+%description devel -l pl
+To jest pakiet programistyczny dla liblockfile, zawiera pliki
+nag³ówkowe i dokumentacjê.
 
 %prep
 %setup -q
@@ -52,12 +63,12 @@ rm -rf $RPM_BUILD_ROOT
 %doc README
 %attr(755,root,root) %{_bindir}/dotlockfile
 %attr(755,root,root) %{_libdir}/liblockfile.so.*.*
+%{_mandir}/man1/dotlockfile.1*
 
 %files devel
 %defattr(644,root,root,755)
-%{_libdir}/liblockfile.so
+%attr(755,root,root) %{_libdir}/liblockfile.so
 %{_includedir}/lockfile.h
 %{_includedir}/maillock.h
-%{_mandir}/man1/dotlockfile.1*
 %{_mandir}/man3/lockfile_create.3*
 %{_mandir}/man3/maillock.3*
