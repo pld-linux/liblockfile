@@ -1,5 +1,5 @@
 Summary:	NFS-safe locking library, includes dotlockfile program
-Summary(pl.UTF-8):   Biblioteka blokowania plików uwzględniająca NFS wraz z programem dotlockfile
+Summary(pl.UTF-8):	Biblioteka blokowania plików uwzględniająca NFS wraz z programem dotlockfile
 Name:		liblockfile
 Version:	1.06.1
 Release:	1
@@ -21,7 +21,7 @@ linii poleceń program dotlockfile.
 
 %package devel
 Summary:	Header files for liblockfile library
-Summary(pl.UTF-8):   Pliki nagłówkowe biblioteki liblockfle
+Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki liblockfle
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
