@@ -1,5 +1,5 @@
 Summary:	NFS-safe locking library, includes dotlockfile program
-Summary(pl):	Biblioteka blokowania plików uwzglêdniaj±ca NFS wraz z programem dotlockfile
+Summary(pl.UTF-8):   Biblioteka blokowania plikÃ³w uwzglÄ™dniajÄ…ca NFS wraz z programem dotlockfile
 Name:		liblockfile
 Version:	1.06.1
 Release:	1
@@ -14,14 +14,14 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Liblockfile is a shared library with NFS-safe locking functions. It
 includes the command-line utility ``dotlockfile''.
 
-%description -l pl
-liblockfile to biblioteka wspó³dzielona z funkcjami blokowania plików
-bezpiecznymi tak¿e w przypadku u¿ywania NFS-a. Zawiera dzia³aj±cy z
-linii poleceñ program dotlockfile.
+%description -l pl.UTF-8
+liblockfile to biblioteka wspÃ³Å‚dzielona z funkcjami blokowania plikÃ³w
+bezpiecznymi takÅ¼e w przypadku uÅ¼ywania NFS-a. Zawiera dziaÅ‚ajÄ…cy z
+linii poleceÅ„ program dotlockfile.
 
 %package devel
 Summary:	Header files for liblockfile library
-Summary(pl):	Pliki nag³ówkowe biblioteki liblockfle
+Summary(pl.UTF-8):   Pliki nagÅ‚Ã³wkowe biblioteki liblockfle
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
@@ -29,9 +29,9 @@ Requires:	%{name} = %{version}-%{release}
 This is a development package for liblockfile. It includes headers and
 documentation.
 
-%description devel -l pl
+%description devel -l pl.UTF-8
 To jest pakiet programistyczny dla liblockfile, zawiera pliki
-nag³ówkowe i dokumentacjê.
+nagÅ‚Ã³wkowe i dokumentacjÄ™.
 
 %prep
 %setup -q
