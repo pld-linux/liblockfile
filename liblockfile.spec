@@ -35,6 +35,7 @@ nagłówkowe i dokumentację.
 
 %prep
 %setup -q
+sed -i 's/eaccess/eaccess2/' *.c
 
 %build
 %{__autoconf}
