@@ -1,12 +1,12 @@
 Summary:	NFS-safe locking library, includes dotlockfile program
 Summary(pl.UTF-8):	Biblioteka blokowania plików uwzględniająca NFS wraz z programem dotlockfile
 Name:		liblockfile
-Version:	1.08
+Version:	1.09
 Release:	1
 License:	LGPL v2+ (library), GPL v2+ (dotlockfile)
 Group:		Libraries
 Source0:	http://ftp.debian.org/debian/pool/main/libl/liblockfile/%{name}_%{version}.orig.tar.gz
-# Source0-md5:	c24e2dfb4a2aab0263fe5ac1564d305e
+# Source0-md5:	2aa269e4405ee8235ff17d1b357c6ae8
 BuildRequires:	autoconf
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -63,7 +63,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc COPYRIGHT README
+%doc COPYRIGHT Changelog README
 %attr(755,root,root) %{_bindir}/dotlockfile
 %attr(755,root,root) %{_libdir}/liblockfile.so.*.*
 %attr(755,root,root) %ghost %{_libdir}/liblockfile.so.1
