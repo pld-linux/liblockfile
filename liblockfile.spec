@@ -1,12 +1,12 @@
 Summary:	NFS-safe locking library, includes dotlockfile program
 Summary(pl.UTF-8):	Biblioteka blokowania plików uwzględniająca NFS wraz z programem dotlockfile
 Name:		liblockfile
-Version:	1.09
-Release:	2
+Version:	1.14
+Release:	1
 License:	LGPL v2+ (library), GPL v2+ (dotlockfile)
 Group:		Libraries
 Source0:	http://ftp.debian.org/debian/pool/main/libl/liblockfile/%{name}_%{version}.orig.tar.gz
-# Source0-md5:	2aa269e4405ee8235ff17d1b357c6ae8
+# Source0-md5:	420c056ba0cc4d1477e402f70ba2f5eb
 BuildRequires:	autoconf
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -35,7 +35,8 @@ To jest pakiet programistyczny dla liblockfile, zawiera pliki
 nagłówkowe i dokumentację.
 
 %prep
-%setup -q
+%setup -q -n %{name}
+sed -i -e 's#-g root##g' Makefile.in
 
 %build
 %{__autoconf}
@@ -49,9 +50,9 @@ nagłówkowe i dokumentację.
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_libdir},%{_bindir},%{_includedir},%{_mandir}/man{1,3}}
 
-%{__make} install \
-	MAILGROUP=%(id -gn) \
-	ROOT=$RPM_BUILD_ROOT
+%{makeinstall} \
+	DESTDIR=$RPM_BUILD_ROOT \
+	MAILGROUP=%(id -gn)
 
 ln -sf $(basename $RPM_BUILD_ROOT%{_libdir}/liblockfile.so.1.*) $RPM_BUILD_ROOT%{_libdir}/liblockfile.so.1
 
