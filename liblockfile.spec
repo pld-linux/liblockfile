@@ -1,3 +1,7 @@
+#
+# Conditional build:
+%bcond_with	nfslock		# nfslock library (requires __libc_open symbol)
+
 Summary:	NFS-safe locking library, includes dotlockfile program
 Summary(pl.UTF-8):	Biblioteka blokowania plików uwzględniająca NFS wraz z programem dotlockfile
 Name:		liblockfile
@@ -34,27 +38,46 @@ documentation.
 To jest pakiet programistyczny dla liblockfile, zawiera pliki
 nagłówkowe i dokumentację.
 
+%package static
+Summary:	Static liblockfile library
+Summary(pl.UTF-8):	Statyczna biblioteka liblockfile
+Group:		Development/Libraries
+Requires:	%{name}-devel = %{version}-%{release}
+
+%description static
+Static liblockfile library.
+
+%description static -l pl.UTF-8
+Statyczna biblioteka liblockfile.
+
 %prep
 %setup -q -n %{name}
-sed -i -e 's#-g root##g' Makefile.in
+
+%{__sed} -i -e 's#-g root##g' Makefile.in
 
 %build
 %{__autoconf}
 %configure \
 	--enable-shared \
-	--with-mailgroup
+	--with-mailgroup \
+	%{?with_nfslock:--with-nfslock}
 
-%{__make}
+%{__make} all %{?with_nfslock:nfslib}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_libdir},%{_bindir},%{_includedir},%{_mandir}/man{1,3}}
 
 %{makeinstall} \
 	DESTDIR=$RPM_BUILD_ROOT \
 	MAILGROUP=%(id -gn)
 
-ln -sf $(basename $RPM_BUILD_ROOT%{_libdir}/liblockfile.so.1.*) $RPM_BUILD_ROOT%{_libdir}/liblockfile.so.1
+%if %{with nfslock}
+%{__make} install_nfslib \
+	DESTDIR=$RPM_BUILD_ROOT \
+	nfslockdir=$RPM_BUILD_ROOT%{_libdir}
+%endif
+
+/sbin/ldconfig -n $RPM_BUILD_ROOT%{_libdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -68,6 +91,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/dotlockfile
 %attr(755,root,root) %{_libdir}/liblockfile.so.*.*
 %attr(755,root,root) %ghost %{_libdir}/liblockfile.so.1
+%if %{with nfslock}
+%attr(755,root,root) %{_libdir}/nfslock.so.0.1
+%endif
 %{_mandir}/man1/dotlockfile.1*
 
 %files devel
@@ -77,3 +103,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/maillock.h
 %{_mandir}/man3/lockfile_create.3*
 %{_mandir}/man3/maillock.3*
+
+%files static
+%defattr(644,root,root,755)
+%{_libdir}/liblockfile.a
